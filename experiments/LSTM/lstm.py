@@ -154,7 +154,7 @@ def main(config):
                 }
             )
             results = pd.merge(results, row, how="outer")
-    results.to_csv(f"results_{model._get_name()}_{NUM_LAYERS}.csv", index=False)
+    results.to_csv(f"results_{model._get_name()}_{NUM_LAYERS}_{SEED}.csv", index=False)
 
 
 if __name__ == "__main__":
