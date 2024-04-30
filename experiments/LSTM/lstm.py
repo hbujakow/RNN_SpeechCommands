@@ -66,8 +66,13 @@ class LSTMModel(nn.Module):
         super(LSTMModel, self).__init__()
         self.hidden_size = hidden_size
         self.num_layers = num_layers
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
-        self.fc = nn.Linear(hidden_size, output_size)
+        self.lstm = nn.LSTM(
+            input_size, hidden_size, num_layers, batch_first=True, dropout=0.15
+        )
+
+        self.fc = nn.Linear(hidden_size, hidden_size // 2)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size // 2, output_size)
 
     def forward(self, x):
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
@@ -75,7 +80,7 @@ class LSTMModel(nn.Module):
 
         out, _ = self.lstm(x, (h0, c0))
 
-        out = self.fc(out[:, -1, :])
+        out = self.fc2(self.relu(self.fc(out[:, -1, :])))
         return out
 
 
@@ -103,6 +108,7 @@ def main(config):
     test = test.shuffle(seed=SEED)
 
     torch.cuda.empty_cache()
+    print(HIDDEN_SIZE, NUM_LAYERS, len(subset_of_labels))
     model = LSTMModel(
         12, HIDDEN_SIZE, NUM_LAYERS, len(subset_of_labels)
     )  # 12 - corresponds to 12 features in MFCC
