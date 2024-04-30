@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 import librosa
 import numpy as np
@@ -96,6 +97,11 @@ def main(config):
     SEED = config["seed"]
     NUM_LAYERS = config["num_layers"]
     HIDDEN_SIZE = config["hidden_size"]
+
+    random.seed(SEED)
+    np.random.seed(SEED)
+    torch.manual_seed(SEED)
+    torch.cuda.manual_seed_all(SEED)
 
     speech_data = load_dataset(
         "speech_commands", "v0.02", cache_dir="only_selected/data_here"
