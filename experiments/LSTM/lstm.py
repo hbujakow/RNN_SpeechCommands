@@ -112,7 +112,7 @@ def cut_audio(example):
 
 def swap_labels_for_data_split(data):
     id2label_org = data.features["label"].int2str
-    normal = data.filter(lambda x: id2label_org(x["label"])) in normal_classes)
+    normal = data.filter(lambda x: id2label_org(x["label"]) in normal_classes)
 
     class_size = ceil(len(normal) / len(normal_classes))
     to_subsample = data.filter(lambda x: id2label_org(str(x["label"])) in to_be_subsampled)
