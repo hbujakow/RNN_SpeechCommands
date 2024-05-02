@@ -175,8 +175,8 @@ def main(config):
 
     torch.cuda.empty_cache()
 
-    hidden_sizes = [16, 32, 64, 128, 256]
-    num_layers = list(range(1, 16))  # 1 to 15
+    hidden_sizes = [16, 64, 256]
+    num_layers = [1, 2, 4, 8, 16]  # 1 to 15
 
     for NUM_LAYERS in num_layers:
         for HIDDEN_SIZE in hidden_sizes:
@@ -202,7 +202,7 @@ def main(config):
             model.to(device)
 
             model_path = (
-                f"{model._get_name()}"
+                f"results/{model._get_name()}"
                 + f"__NUM_LAY_{NUM_LAYERS}_HID_{HIDDEN_SIZE}_SEED_{SEED}"
             )
 
