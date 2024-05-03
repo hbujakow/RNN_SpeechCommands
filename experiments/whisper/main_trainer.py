@@ -6,7 +6,7 @@ from math import ceil
 import numpy as np
 import pandas as pd
 import torch
-from datasets import load_dataset, concatenate_datasets, DatasetDict
+from datasets import DatasetDict, concatenate_datasets, load_dataset
 from transformers import (
     AutoConfig,
     AutoFeatureExtractor,
@@ -48,6 +48,7 @@ to_be_subsampled = {
     "visual",
 }
 
+
 def swap_to_unknown(examples):
     examples["label"] = [10] * len(examples["label"])
     return examples
@@ -83,6 +84,7 @@ def swap_labels_for_data_split(data):
     results = concatenate_datasets([normal, to_subsample, silence])
     return results
 
+
 def preprocess(speech_data):
     train = speech_data["train"]
     validation = speech_data["validation"]
@@ -92,11 +94,8 @@ def preprocess(speech_data):
     validation = swap_labels_for_data_split(validation)
     test = swap_labels_for_data_split(test)
 
-    return DatasetDict({
-        "train": train,
-        "validation": validation,
-        "test": test
-    })
+    return DatasetDict({"train": train, "validation": validation, "test": test})
+
 
 def main(config):
     HG_MODEL_PATH = config["hg_model_path"]
@@ -130,7 +129,6 @@ def main(config):
         batched=True,
         remove_columns=["file", "audio", "speaker_id", "utterance_id", "is_unknown"],
     ).with_format("torch")
-
 
     id2label = {
         "0": "yes",
@@ -239,6 +237,7 @@ def main(config):
 
     with open(f"checkpoints/{model_path}/config.json", "w") as f:
         json.dump(config, f, indent=4)
+
 
 if __name__ == "__main__":
     with open("config.json") as f:

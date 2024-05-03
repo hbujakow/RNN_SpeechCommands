@@ -10,11 +10,10 @@ import numpy as np
 import pandas as pd
 import torch
 from datasets import concatenate_datasets, load_dataset
+from models import GRUModel, LSTMModel, RNNModel
 from torch import nn
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
-
-from models import GRUModel, LSTMModel, RNNModel
 
 warnings.filterwarnings("ignore")
 
