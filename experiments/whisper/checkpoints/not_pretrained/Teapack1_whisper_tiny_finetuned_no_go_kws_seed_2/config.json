@@ -1,0 +1,7 @@
+{
+    "num_epochs": 30,
+    "batch_size": 256,
+    "hg_model_path": "Teapack1/whisper-tiny-finetuned-no-go-kws",
+    "seed": 2,
+    "pretrained": false
+}
