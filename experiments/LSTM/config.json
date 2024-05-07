@@ -1,0 +1,5 @@
+{
+    "model": "lstm",
+    "num_epochs": 25,
+    "batch_size": 256
+}

@@ -1,0 +1,8 @@
+{
+    "model": "lstm",
+    "num_epochs": 25,
+    "batch_size": 256,
+    "seed": 2,
+    "num_layers": 4,
+    "hidden_size": 64
+}

@@ -1,0 +1,7 @@
+{
+    "num_epochs": 3,
+    "batch_size": 256,
+    "hg_model_path": "MIT/ast-finetuned-speech-commands-v2",
+    "seed": 3,
+    "pretrained": true
+}
