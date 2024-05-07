@@ -23,11 +23,6 @@ python main_trainer.py
 ```
 
 
-
-```bash
-python train_model.py --config <path_to_config_file> --checkpoints <path_to_save_checkpoints>
-```
-
 # Model checkpoints
 
 Model checkpoints are available in the `LSTM/results` and `whisper/checkpoints` directories. The checkpoints for the AST are not available due to their large size, however we include all configuration files used for training, which can be used to reproduce the results.
